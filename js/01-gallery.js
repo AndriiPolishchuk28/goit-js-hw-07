@@ -23,14 +23,14 @@ galleryRef.insertAdjacentHTML("afterbegin", markUpGallery);
 
 galleryRef.addEventListener("click", (event) => {
   event.preventDefault();
-  let instance = "";
-  if (event.target.nodeName === "IMG") {
-    instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600">
-`);
-    instance.show();
+  if (event.target.nodeName !== "IMG") {
+    return;
   }
 
+  const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.source}" width="800" height="600">
+`);
+  instance.show();
   galleryRef.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       instance.close();
